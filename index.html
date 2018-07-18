@@ -2,7 +2,10 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8">
+    <meta name="google-signin-client_id" content="441105335360-90p4p1av69nimp2djlcdh06pgv0sqkrj.apps.googleusercontent.com">
+
     <link href="css/login.css" rel="stylesheet">
+
     <script src="https://apis.google.com/js/api:client.js"></script>
     <script src="js/login.js"></script>
   </head>   
@@ -19,6 +22,6 @@
         <span class="button-text">Google</span>
       </div>
     </div>
-    <script>initGoogleAPI();</script>
+    <script src="https://apis.google.com/js/platform.js?onload=initGoogleAPI" async defer></script>
   </body>
 </html>
