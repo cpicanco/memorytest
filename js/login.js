@@ -3,6 +3,7 @@ function onSignIn(response) {
   document.getElementById('user-email').innerText = perfil.getEmail();
   document.getElementById('user-photo').src = perfil.getImageUrl();
   document.getElementById('user-name').innerText = perfil.getName();  
-  console.log("userID: " + perfil.getId());
-  console.log("Tolken: " + response.getAuthResponse().id_token);
+//   console.log("userID: " + perfil.getId());
+//   console.log("Tolken: " + response.getAuthResponse().id_token);
+  window.location.replace("/app")
 };
