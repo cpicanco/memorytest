@@ -102,6 +102,5 @@ function init() {
   btn.onclick=function() {logEvent("button")};
   document.body.appendChild(btn);
   document.body.appendChild(table);
+  debugger;
 };
-
-init();

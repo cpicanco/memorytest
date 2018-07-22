@@ -2,8 +2,7 @@ var auth2; // The Sign-In object.
 var googleUser; // The current user.
 
 var onClickGoogleSignInSuccess = function(user) {
-  googleUser = user;
-  updateGoogleUser();   
+  updateGoogleUser(user);   
 }
 
 var onClickGoogleSignInFailure = function(error) {
@@ -31,16 +30,15 @@ var configGoogleAPI = function() {
   auth2.isSignedIn.listen(signinChanged);
 
   // Listen for changes to current user.
-  auth2.currentUser.listen(userChanged);
+  // auth2.currentUser.listen(userChanged);
 
   // Sign in the user if they are currently signed in.
   if (auth2.isSignedIn.get() == true) {
     auth2.signIn();
-    console.log('a user is signed-in')
+    console.log('a user signed-in')
   }
   // Start with the current live values.
-  googleUser = auth2.currentUser.get();
-  updateGoogleUser();
+  updateGoogleUser(auth2.currentUser.get());
 };
 
 
@@ -50,6 +48,7 @@ var configGoogleAPI = function() {
  * @param {boolean} val the updated signed out state.
  */
 var signinChanged = function (val) {
+  console.log('sign-in changed')
   console.log(val)
 };
 
@@ -58,29 +57,42 @@ var signinChanged = function (val) {
  *
  * @param {GoogleUser} user the updated user.
  */
-var userChanged = function (user) {
-  console.log(user)
-  googleUser = user;
-  updateGoogleUser();
-};
+// var userChanged = function (user) {
+//   console.log(user)
+//   googleUser = user;
+//   updateGoogleUser();
+// };
 
 /**
  * Updates the properties in the Google User table using the current user.
  */
-var updateGoogleUser = function () {
-  if (googleUser) {
-    document.getElementById('google-signin-wrapper').display = "none";
-    document.getElementById('user-email').innerText = googleUser.getBasicProfile().getEmail();
-    document.getElementById('user-photo').src = googleUser.getBasicProfile().getImageUrl();
-    document.getElementById('user-name').innerText = googleUser.getBasicProfile().getName();  
-    // document.getElementById('user-id').innerText = googleUser.getId();
-    // document.getElementById('user-scopes').innerText = googleUser.getGrantedScopes();
-    // document.getElementById('auth-response').innerText = JSON.stringify(googleUser.getAuthResponse(), undefined, 2);
-    window.location.replace("/app");  
+var updateGoogleUser = function (user) {
+  if (user.El) {
+    document.getElementById('signin-wrapper').display = "none";
+    document.getElementById('user-email').innerText = user.getBasicProfile().getEmail();
+    document.getElementById('user-photo').src = user.getBasicProfile().getImageUrl();
+    document.getElementById('user-name').innerText = user.getBasicProfile().getName();  
+    // document.getElementById('user-id').innerText = user.getId();
+    // document.getElementById('user-scopes').innerText = user.getGrantedScopes();
+    // document.getElementById('auth-response').innerText = JSON.stringify(user.getAuthResponse(), undefined, 2);
+    // window.location.replace("/app");  
   } else {
-    document.getElementById('google-signin-wrapper').display = "block";
+    document.getElementById('signin-wrapper').display = "block";
     document.getElementById('user-email').innerText = "";
     document.getElementById('user-photo').src = "media/visitante.png";
     document.getElementById('user-name').innerText = "visitante";  
   }
+  googleUser = user;
 };
+
+function showLoginWrapper() {
+  var checkBox = document.getElementById("consent");
+  var wrapper = document.getElementById("signin-wrapper");
+
+  // If the checkbox is checked, display the output text
+  if (checkBox.checked){
+    wrapper.style.display = "block";
+  } else {
+    wrapper.style.display = "none";
+  }
+}

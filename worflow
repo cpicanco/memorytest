@@ -1,0 +1,36 @@
+# linux development environment
+  
+  # install ruby
+  # https://github.com/postmodern/ruby-install#readmes
+  # https://cache.ruby-lang.org/pub/ruby/2.2/ruby-2.5.0.tar.gz
+  ruby-install ruby 2.5.0 
+  gem install bundler jekyll
+
+  # edit your ~/.bashrc
+  # export PATH="/home/rafael/.rubies/ruby-2.2.3/bin:$PATH"
+
+  # install ruby gems
+  cd ~
+  cd Downloads/
+  wget https://rubygems.org/rubygems/rubygems-2.6.7.tgz
+  tar xvf rubygems-2.6.7.tgz
+  cd rubygems-2.6.7
+  sudo ruby setup.rb
+
+  # install bundler and jekyll
+  gem install bundler jekyll
+
+  # install this site
+  cd ~
+  cd git/
+  git clone https://github.com/cpicanco/teste.git
+  cd teste
+  bundle install
+
+# misc
+
+  # update github-pages dependencies
+  bundle update
+
+  # serve github page
+  bundle exec jekyll serve

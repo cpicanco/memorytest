@@ -3,25 +3,34 @@
   <head>
     <meta charset="UTF-8">
     <meta name="google-signin-client_id" content="441105335360-90p4p1av69nimp2djlcdh06pgv0sqkrj.apps.googleusercontent.com">
-
     <link href="css/login.css" rel="stylesheet">
-
     <script src="https://apis.google.com/js/api:client.js"></script>
     <script src="js/login.js"></script>
   </head>   
   <body>
+    <header></header>
     <div class="user">
       <img id="user-photo" src="https://teste.rafael.picanco.nom.br/media/visitante.png">
       <h1>Olá, <span id="user-name">visitante</span>!</h1>
       <p id="user-email"></p>
     </div>
-    <div id="google-signin-wrapper">
+    <div class="checkbox">
+      <input id="consent" type="checkbox" name="consent" onclick="showLoginWrapper()">
+      Li e aceito o <a href="tcle">Termo de Consentimento Livre Esclarecido</a>.<br>
+    </div>
+    <div id="signin-wrapper">
       <span class="label">Entrar com:</span>
-      <div id="signin-button" class="customGPlusSignIn">
+      <div id="signin-button">
         <span class="icon"></span>
         <span class="button-text">Google</span>
       </div>
     </div>
     <script src="https://apis.google.com/js/platform.js?onload=initGoogleAPI" async defer></script>
+    <script src="js/app.js" type="module"></script>
+    <div id="experiment-container"></div>
+    <footer id="site-footer">
+        <p>&copy; Carlos Rafael Fernandes Picanço, 2018.</p>
+        <p>Ícones feitos por <a href="https://www.flaticon.com/authors/gregor-cresnar" title="Gregor Cresnar">Gregor Cresnar</a>, disponíveis em <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> sob a licença <a href="https://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>.</p>
+    </footer>
   </body>
 </html>

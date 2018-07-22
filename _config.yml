@@ -1,0 +1,15 @@
+url: https://teste.rafael.picanco.nom.br
+exclude: ['.gitignore',
+          'CNAME',
+          'teste.sublime-project',
+          'teste.sublime-workspace',
+          'Gemfile',
+          'Gemfile.lock',
+          'LICENSE',
+          'README.md',
+          'package.json',
+          'css/src/',
+          'css/min/',
+          'js/src/',
+          'tests.html',
+          ]
