@@ -5,10 +5,19 @@ var TManager = {
   TimeStart : 0,
   CurrentTrial : 0,
   CurrentBloc : 0,
+  SessionTrial: 0,
+
   CurrentBlocTrials : 0,
-  Blocs : 0,
+  SessionBlocs : 0,
   NextTrial : function(){
     this.CurrentTrial++;
+    this.SessionTrial++;
+  },
+
+  NextBloc : function() {
+    this.CurrentTrial = 0;
+    this.CurrentBloc++;
+    this.SessionTrial++;
   },
 
   start : function(){

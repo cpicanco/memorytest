@@ -17,7 +17,8 @@ class TConfiguration {
 
     manager.CurrentTrial = configurations.CurrentTrial;
     manager.CurrentBloc = configurations.CurrentBloc;
-    manager.CurrentBlocTrials = configurations.blocs[manager.CurrentBloc].trials.length; 
+    manager.CurrentBlocTrials =     
+    manager.SessionBlocs = configurations.blocs.length;
 
     this.Participant = configs.Participant;
     this.CurrentTrial = function(){
@@ -32,15 +33,29 @@ class TConfiguration {
             // todo
             break;
           case 'TLikert':
-            trial = null;
+            // todo
             break;
+      };
+
+      trial.id = 'T'+manager.CurrentTrial.toString();
+
+
+      if (trialconfig.interval == null){
+        trial.interval = 1000;
+      } else {
+        trial.interval = trialconfig.interval;
+      };
+
+      if (trialconfig.name == null){
+        trial.name = 'Tentativa '+(manager.CurrentTrial+1).toString();
+      } else {
+        trial.name = trialconfig.name;
       };
       return trial;
     };
 
-    this.CurrentBloc = function(){
-      manager.Blocs = configurations.blocs.length;
-      return configurations.blocs[manager.CurrentBloc]
+    this.CurrentBlocTrials = function(){
+      return configurations.blocs[manager.CurrentBloc].trials.length; 
     };
   };
 };

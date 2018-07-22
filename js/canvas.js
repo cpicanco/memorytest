@@ -34,8 +34,8 @@ function onFullscreenChange(){
         if (canvas.OnShow !== null)(canvas.OnShow(canvas));
     } else {
         canvas.style.display = "none";
-        canvas.style.width = "100px";
-        canvas.style.height = "100px";
+        // canvas.style.width = "100px";
+        // canvas.style.height = "100px";
         if (canvas.OnHide !== null)(canvas.OnHide(canvas));
     };
   };

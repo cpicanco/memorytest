@@ -1,31 +1,36 @@
 import { manager } from './manager.js';
-import { tabulate } from './helpers.js';
 
 class TTrial {
   constructor(canvas){
     var stimuli = [];
     this.limitedhold = null;
+    this.message = ''
     this.show = function(){
       for (let i = 0; i < stimuli.length; i++) {
-          stimuli[i].show();
+        stimuli[i].show();
       };
     };
 
     this.hide = function(){
       for (let i = 0; i < stimuli.length; i++) {
-          stimuli[i].hide();
+        stimuli[i].hide();
       };
     };
 
     this.clear = function(){
       for (let i = 0; i < stimuli.length; i++) {
-          canvas.removeChild(stimuli[i]);      
+        canvas.removeChild(stimuli[i]);      
       };
+    };
+
+    var self = this;
+    var name = function () {
+      return self.name;
     };
 
     var logger = function(event){
       var now = manager.now();
-      manager.timestamps.appendRow(now, manager.CurrentBloc, manager.CurrentTrial, this.name, event);
+      manager.timestamps.appendRow(now, manager.CurrentBloc, manager.CurrentTrial, name(), event);
       return now;
     };
 
@@ -47,7 +52,7 @@ class TTrial {
 
     this.appendStimulus = function(stimulus){
       var sn = stimuli.length+1;
-      stimulus.id = "stimulus-${sn}";
+      stimulus.id = "stimulus-"+sn.toString();
       stimulus.show = function(){
         this.style.display = "block"
       };
@@ -79,24 +84,18 @@ class TTrial {
     this.log('tentativa.inicio');
     if (this.OnTrialBegin !== null) { this.OnTrialBegin(this) };  
   };
-
-  static header(){
-    return 'Tentativa.Resultado';
-  };
 };
 
 class TMessage extends TTrial {
   constructor(canvas){
     super(canvas);
     var latency = null;
-
-    var EndTrial = function(){
-      // do stuff before end trial here
-      TTrial.end.call(this);  
-    };
+    var logger = this.log;
 
     this.createStimulus = function(message){
-      var stimulus = document.createElement("P");
+      var instance = this;
+      var stimulus = document.createElement("SPAN");
+      stimulus.classList.add('stimulus');
       stimulus.innerText = message;
       stimulus.width = "75%";
       stimulus.height = "75%";
@@ -106,12 +105,11 @@ class TMessage extends TTrial {
       stimulus.style.transform = "translate(-50%, -50%)";
 
       stimulus.onclick = function(){
-        var now = this.log(stimulus.id+".click");
+        var now = logger(stimulus.id+".click");
         latency = now;
-        EndTrial();
+        instance.end();
       };
       this.appendStimulus(stimulus);
-      // return stimulus;
     };
 
     this.begin = function(){
@@ -119,15 +117,16 @@ class TMessage extends TTrial {
       TTrial.begin.call(this);  
     };
 
-    this.end = EndTrial; // only possible when limited hold > 0
+    this.end = function(){
+      // do stuff before end trial here
+      TTrial.end.call(this); 
+    };
 
     this.data = function(){
-      return tabulate('NA', latency);
+      return ['NA', latency];
     };
 
-    this.header = function(){
-      return tabulate(TTrial.header.call(this), 'Tentativa.Latência');
-    };
+    this.header = ['Tentativa.Resultado', 'Tentativa.Latência'];
   };
 };
 

@@ -35,15 +35,27 @@ class TReport {
     this.table.style.width  = '100px';
     this.table.style.border = '1px solid black';
     this.table.appendChild(downloadButton);
-
+    this.currentRow = null;
     this.appendRow = function() {
       var newRow = this.table.insertRow();
+      this.currentRow = newRow;
       for (let i = 0; i < arguments.length; i++) {
-        let cell = newRow.insertCell();
-        cell.appendChild(document.createTextNode(arguments[i]));
-        cell.style.borderBottom = '1px solid black'; 
+        this.appendCell(arguments[i]);
       };
-    }; 
+    };
+
+    this.appendCell = function(content) {
+      var cell = this.currentRow.insertCell();
+      cell.appendChild(document.createTextNode(content));
+      cell.style.borderBottom = '1px solid black';       
+    };
+
+    this.appendToCurrentRow = function(content){
+      for (let i = 0; i < content.length; i++) {
+        this.appendCell(content[i]);
+      }
+    };
+
     this.log = null;
 
     this.show = function(){
