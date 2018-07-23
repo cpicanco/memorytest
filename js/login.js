@@ -29,6 +29,7 @@ var configGoogleAPI = function() {
     window.gapi.auth2.getAuthInstance().isSignedIn.listen(signinChanged);
     window.gapi.auth2.getAuthInstance().currentUser.listen(userChanged);
     document.getElementById('signin-button').onclick = function(){window.gapi.auth2.getAuthInstance().signIn()};
+    document.getElementById("consent").onclick = showLoginWrapper;
     updateConsent(false);    
     console.log('google api initialized')
   }, function(error) {
