@@ -1,3 +1,4 @@
+import { sendGMailMessage } from './email.js';
 import { manager } from './manager.js';
 import { bloc } from './blocs.js';
 
@@ -17,15 +18,26 @@ class TExperiment {
     };
     Object.defineProperty(this, 'container', { get: container});
 
-
     bloc.OnEndBloc = function(){
+      var endsession = function(){
+        alert('O teste chegou ao final!');
+      };
+
       if (manager.CurrentBloc <= manager.SessionBlocs -1) {
         bloc.begin();
       } else {
-        alert('A sessão acabou!');
+        if (googleUser !== null){
+          if (googleUser.El) {
+            sendGMailMessage(googleUser, manager.data.asString(), function(data){ console.log(data); endsession(); });
+          } else {
+            endsession();
+          };
+        } else {
+          endsession();
+        };
       };
     };
-    
+
     this.bloc = bloc;
     this.manager = manager;
     this.canvas = manager.canvas;
@@ -35,22 +47,23 @@ class TExperiment {
 };
 
 var experiment = new TExperiment();
-// document.body=document.createElement("BODY");
-experiment.container.appendChild(manager.data.table);
-experiment.container.appendChild(manager.timestamps.table);
-
 
 var btn = document.createElement("BUTTON");
-var text = document.createTextNode("Try it");
-btn.appendChild(text);
+btn.id = 'start-button';
+btn.appendChild(document.createTextNode("Começar!"));
 btn.onclick=function() {
   experiment.canvas.fullscreen();
   experiment.begin();
 };
-experiment.container.appendChild(btn);
 
-var btn = document.createElement("BUTTON");
-var text = document.createTextNode("Log");
-btn.appendChild(text);
-btn.onclick=function() {manager.timestamps.log("button")};
 experiment.container.appendChild(btn);
+experiment.container.appendChild(manager.data.table);
+experiment.container.appendChild(manager.timestamps.table);
+
+// var btn = document.createElement("BUTTON");
+// var text = document.createTextNode("Log");
+// btn.appendChild(text);
+// btn.onclick=function() {manager.timestamps.log("button")};
+// experiment.container.appendChild(btn);
+
+// var win = window.open('/tcle');

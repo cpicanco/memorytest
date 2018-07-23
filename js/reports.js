@@ -1,7 +1,7 @@
 class TReport {
   constructor(name){
     var owner = this;
-    var tsvFileFromTable = function(){
+    var tsvFileFromTable = function(asString=false){
       var tsv = '';
       var rows = owner.table.rows;
       for (let i = 0; i < rows.length; i++) {
@@ -14,7 +14,11 @@ class TReport {
           }; 
         };  
       };
-      return new Blob([tsv], {type: 'text/plain', endings:'native'});
+      if (asString) {
+        return tsv
+      } else {
+        return new Blob([tsv], {type: 'text/plain', endings:'native'});
+      };
     };
 
     var downloadButton = document.createElement("BUTTON");
@@ -53,14 +57,18 @@ class TReport {
     this.appendToCurrentRow = function(content){
       for (let i = 0; i < content.length; i++) {
         this.appendCell(content[i]);
-      }
+      };
     };
 
     this.log = null;
 
     this.show = function(){
       this.table.display = 'block';
-    }; 
+    };
+
+    this.asString = function(){
+      return tsvFileFromTable(true);
+    } 
   };     
 };
 

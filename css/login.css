@@ -105,7 +105,19 @@ table {
 
 */
 
-#signin-button {
+#start-button {
+  padding-top: 14px;
+  padding-bottom: 14px;
+
+  font-size: 14px;
+  font-weight: bold;
+  font-family: 'Roboto', sans-serif;
+
+  margin-top: 14px;
+  margin-bottom: 14px; 
+}
+
+#signin-button, #start-button {
   display: inline-block;
   background: #4285f4;
   color: white;
@@ -129,11 +141,11 @@ table {
   vertical-align: middle;
 }
 
-#signin-button:hover {
+#signin-button:hover, #start-button:hover {
   cursor: pointer;
 }
 
-#signin-button:active {
+#signin-button:active, #start-button:active {
   background: #3d7ee8;
   border: thin solid #3d7ee8;
 }
@@ -157,4 +169,8 @@ table {
   font-size: 14px;
   font-weight: bold;
   font-family: 'Roboto', sans-serif;
+}
+
+#consent-box {
+  display: none;
 }
