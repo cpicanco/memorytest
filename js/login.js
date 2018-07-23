@@ -4,20 +4,6 @@ window.initGoogleAPI = function() {
   window.gapi.load('client:auth2', configGoogleAPI);
 };
 
-var onClickGoogleSignInSuccess = function(user) {
-  if (user.El !== window.googleUser.El){
-    window.googleUser = user;
-    updateConsent(true);
-    updateGoogleUser(user); 
-  }
-};
-
-var onClickGoogleSignInFailure = function(error) {
-  updateConsent(false);
-  window.googleUser = {El: null, Zi: null};
-  updateGoogleUser(window.googleUser); 
-};
-
 var configGoogleAPI = function() {
   window.gapi.client.init({
     apiKey: 'AIzaSyB1N43N1iNus5iFQsjL-JwikXpBfuj2jYs',
@@ -29,7 +15,6 @@ var configGoogleAPI = function() {
     window.gapi.auth2.getAuthInstance().isSignedIn.listen(signinChanged);
     window.gapi.auth2.getAuthInstance().currentUser.listen(userChanged);
     document.getElementById('signin-button').onclick = function(){window.gapi.auth2.getAuthInstance().signIn()};
-    document.getElementById("consent").onclick = showLoginWrapper;
     updateConsent(false);    
     console.log('google api initialized')
   }, function(error) {
@@ -46,6 +31,8 @@ function showLoginWrapper() {
     wrapper.style.display = "none";
   };
 };
+
+document.getElementById("consent").onclick = showLoginWrapper;
 
 var updateConsent = function(signin){
   var consentbox = document.getElementById('consent-box');
