@@ -1,4 +1,5 @@
-var CLIENT_ID = '441105335360-90p4p1av69nimp2djlcdh06pgv0sqkrj.apps.googleusercontent.com';
+var CLIENT_ID = document.getElementsByName('google-signin-client_id')[0].content;
+var KEY = document.getElementsByName('app-id')[0].content;
 window.googleUser = {El: null, Zi: null};
 window.initGoogleAPI = function() {
   window.gapi.load('client:auth2', configGoogleAPI);
@@ -60,7 +61,7 @@ var userChanged = function(user){
 
 var configGoogleAPI = function() {
   window.gapi.client.init({
-    apiKey: 'AIzaSyB1N43N1iNus5iFQsjL-JwikXpBfuj2jYs',
+    apiKey: KEY,
     discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest'],
     clientId: CLIENT_ID,
     scope: 'profile https://www.googleapis.com/auth/gmail.send'
