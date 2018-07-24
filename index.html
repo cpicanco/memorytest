@@ -4,20 +4,25 @@
     <meta charset="UTF-8">
     <meta name="google-signin-client_id" content="441105335360-90p4p1av69nimp2djlcdh06pgv0sqkrj.apps.googleusercontent.com">
     <meta name="app-id" content="AIzaSyB1N43N1iNus5iFQsjL-JwikXpBfuj2jYs">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/login.css" rel="stylesheet">
     <script src="js/thirdparty/base64.js"></script>
     <script src="js/login.js" type="module"></script>
   </head>   
   <body>
-    <header></header>
-    <div class="user">
-      <img id="user-photo" src="https://teste.rafael.picanco.nom.br/media/visitante.png">
+    <header>
+    </header>
+    <div id="user">
+      <img id="user-photo" src="media/visitante.png">
       <h1>Olá, <span id="user-name">visitante</span>!</h1>
       <p id="user-email"></p>
     </div>
     <div id="consent-box" class="checkbox">
       <input id="consent" type="checkbox" name="consent">
       Li e aceito o <a href="tcle">Termo de Consentimento Livre Esclarecido</a>.<br>
+    </div>
+    <div id="loading-svg">
+      <svg width="100%" height="100%" xmlns="https://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="lds-eclipse"><path stroke="none" d="M10 50A40 40 0 0 0 90 50A40 42 0 0 1 10 50" fill="#f08d43" transform="rotate(270 50 51)"><animateTransform attributeName="transform" type="rotate" calcMode="linear" values="0 50 51;360 50 51" keyTimes="0;1" dur="1s" begin="0s" repeatCount="indefinite"></animateTransform></path></svg>
     </div>
     <div id="signin-wrapper">
       <span class="label">Entrar com:</span>
