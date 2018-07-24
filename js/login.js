@@ -4,25 +4,7 @@ window.initGoogleAPI = function() {
   window.gapi.load('client:auth2', configGoogleAPI);
 };
 
-var configGoogleAPI = function() {
-  window.gapi.client.init({
-    apiKey: 'AIzaSyB1N43N1iNus5iFQsjL-JwikXpBfuj2jYs',
-    discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest'],
-    clientId: CLIENT_ID,
-    scope: 'profile https://www.googleapis.com/auth/gmail.send'
-  }).then(function() {
-    window.auth2 = window.gapi.auth2.getAuthInstance();
-    window.gapi.auth2.getAuthInstance().isSignedIn.listen(signinChanged);
-    window.gapi.auth2.getAuthInstance().currentUser.listen(userChanged);
-    document.getElementById('signin-button').onclick = function(){window.gapi.auth2.getAuthInstance().signIn()};
-    updateConsent(false);    
-    console.log('google api initialized')
-  }, function(error) {
-    console.log(error);
-  });
-};
-
-function showLoginWrapper() {
+window.showLoginWrapper = function() {
   var checkBox = document.getElementById("consent");
   var wrapper = document.getElementById("signin-wrapper");
   if (checkBox.checked){
@@ -46,8 +28,22 @@ var updateConsent = function(signin){
   }  
 };
 
+var updateGoogleUser = function(user){
+  if (user.El) {
+    document.getElementById('signin-wrapper').display = "none";
+    document.getElementById('user-email').innerText = user.getBasicProfile().getEmail();
+    document.getElementById('user-photo').src = user.getBasicProfile().getImageUrl();
+    document.getElementById('user-name').innerText = user.getBasicProfile().getName();   
+  } else {
+    document.getElementById('signin-wrapper').display = "block";
+    document.getElementById('user-email').innerText = "";
+    document.getElementById('user-photo').src = "media/visitante.png";
+    document.getElementById('user-name').innerText = "visitante";  
+  };
+  window.googleUser = user;
+};
+
 var signinChanged = function(signin){
-  console.log('sign-in changed', signin)
   updateConsent(signin);
   if (signin) {
     window.gapi.client.setToken(window.googleUser.getAuthResponse().id_token)
@@ -58,24 +54,24 @@ var signinChanged = function(signin){
 };
 
 var userChanged = function(user){
-  window.googleUser = user;
+  updateGoogleUser(user);
+  signinChanged(window.auth2.isSignedIn.get());
 };
 
-var updateGoogleUser = function(user){
-  console.log('a user was updated')
-  window.googleUser = user;
-  if (user.El) {
-    document.getElementById('signin-wrapper').display = "none";
-    document.getElementById('user-email').innerText = user.getBasicProfile().getEmail();
-    document.getElementById('user-photo').src = user.getBasicProfile().getImageUrl();
-    document.getElementById('user-name').innerText = user.getBasicProfile().getName();  
-    // document.getElementById('user-id').innerText = user.getBasicProfile().getId();
-    // document.getElementById('user-scopes').innerText = user.getBasicProfile().getGrantedScopes();
-    // document.getElementById('auth-response').innerText = JSON.stringify(user.getAuthResponse(), undefined, 2); 
-  } else {
-    document.getElementById('signin-wrapper').display = "block";
-    document.getElementById('user-email').innerText = "";
-    document.getElementById('user-photo').src = "media/visitante.png";
-    document.getElementById('user-name').innerText = "visitante";  
-  };
+var configGoogleAPI = function() {
+  window.gapi.client.init({
+    apiKey: 'AIzaSyB1N43N1iNus5iFQsjL-JwikXpBfuj2jYs',
+    discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest'],
+    clientId: CLIENT_ID,
+    scope: 'profile https://www.googleapis.com/auth/gmail.send'
+  }).then(function() {
+    window.auth2 = window.gapi.auth2.getAuthInstance();
+    window.auth2.isSignedIn.listen(signinChanged);
+    window.auth2.currentUser.listen(userChanged);
+    document.getElementById('signin-button').onclick = function(){window.auth2.signIn()};
+    updateConsent(false);   
+    console.log('google api initialized')
+  }, function(error) {
+    console.log(error);
+  });
 };
