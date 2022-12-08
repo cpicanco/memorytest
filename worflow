@@ -1,9 +1,9 @@
 # linux development environment
-  
+
   # install ruby
   # https://github.com/postmodern/ruby-install#readmes
   # https://cache.ruby-lang.org/pub/ruby/2.2/ruby-2.5.0.tar.gz
-  ruby-install ruby 2.5.0 
+  ruby-install ruby 2.5.0
   gem install bundler jekyll
 
   # edit your ~/.bashrc

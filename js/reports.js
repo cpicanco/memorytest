@@ -11,8 +11,8 @@ class TReport {
             tsv = tsv + cols.children[j].innerText + '\t';
           } else {
             tsv = tsv + cols.children[j].innerText + '\n';
-          }; 
-        };  
+          };
+        };
       };
       if (asString) {
         return tsv
@@ -31,7 +31,7 @@ class TReport {
       downloadLink.href = window.URL.createObjectURL(tsvFileFromTable());
       downloadLink.click();
     };
-    
+
     this.table = document.createElement('TABLE');
     this.table.display = 'none';
     this.table.id = name+'_table';
@@ -51,7 +51,7 @@ class TReport {
     this.appendCell = function(content) {
       var cell = this.currentRow.insertCell();
       cell.appendChild(document.createTextNode(content));
-      cell.style.borderBottom = '1px solid black';       
+      cell.style.borderBottom = '1px solid black';
     };
 
     this.appendToCurrentRow = function(content){
@@ -68,8 +68,8 @@ class TReport {
 
     this.asString = function(){
       return tsvFileFromTable(true);
-    } 
-  };     
+    }
+  };
 };
 
 if (data == null) {

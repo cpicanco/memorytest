@@ -21,7 +21,7 @@ var TManager = {
   },
 
   start : function(){
-    this.TimeStart = window.performance.now();      
+    this.TimeStart = window.performance.now();
   },
 
   now : function(){
@@ -39,4 +39,4 @@ if (manager == null) {
   // do nothing
 };
 
-export { manager }; 
+export { manager };

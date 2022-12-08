@@ -1,4 +1,4 @@
-import { manager } from './manager.js'; 
+import { manager } from './manager.js';
 import { TMessage } from './trials.js';
 
 class TConfiguration {
@@ -17,7 +17,7 @@ class TConfiguration {
 
     manager.CurrentTrial = configurations.CurrentTrial;
     manager.CurrentBloc = configurations.CurrentBloc;
-    manager.CurrentBlocTrials =     
+    manager.CurrentBlocTrials = configurations.CurrentBlocTrials;
     manager.SessionBlocs = configurations.blocs.length;
 
     this.Participant = configs.Participant;
@@ -55,7 +55,7 @@ class TConfiguration {
     };
 
     this.CurrentBlocTrials = function(){
-      return configurations.blocs[manager.CurrentBloc].trials.length; 
+      return configurations.blocs[manager.CurrentBloc].trials.length;
     };
   };
 };

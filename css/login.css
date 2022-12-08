@@ -4,7 +4,7 @@
 body {
   position: static;
   margin: 0;
-  padding-top: 10%;  
+  padding-top: 10%;
   text-align: center;
   font-family: 'Open Sans';
   background: #F8F8F8;
@@ -28,8 +28,8 @@ footer, table {
 
 table {
   margin: 1em 0 0 0;
-  margin-left:auto; 
-  margin-right:auto; 
+  margin-left:auto;
+  margin-right:auto;
   padding: 1rem;
 }
 
@@ -44,10 +44,10 @@ footer {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);  
+  transform: translate(-50%, -50%);
 }
 
-/* 
+/*
 
   experiment
 
@@ -56,14 +56,14 @@ footer {
 #experiment-container {
   text-align: center;
   padding-top: 10px;
-  padding-bottom: 10px; 
+  padding-bottom: 10px;
 }
 
 #global-canvas {
   margin-left: auto;
   margin-right: auto;
   padding-top: 10px;
-  padding-bottom: 10px;  
+  padding-bottom: 10px;
 }
 
 .stimulus {
@@ -76,7 +76,7 @@ footer {
   -o-user-select: none;
 }
 
-/* 
+/*
 
   user
 
@@ -112,9 +112,9 @@ footer {
   color: #0066AA;
 }
 
-/* 
+/*
 
-  sign-in button 
+  sign-in button
 
 */
 
@@ -127,7 +127,7 @@ footer {
   font-family: 'Roboto', sans-serif;
 
   margin-top: 14px;
-  margin-bottom: 14px; 
+  margin-bottom: 14px;
 }
 
 #signin-button, #start-button {
@@ -146,7 +146,7 @@ footer {
 }
 
 #signin-wrapper span.label {
-  display: block; 
+  display: block;
   font-family: sans-serif;
   font-weight: normal;
   padding-top: 10px;

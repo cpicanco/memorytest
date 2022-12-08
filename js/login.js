@@ -26,7 +26,7 @@ var updateConsent = function(signin){
   } else {
     consentbox.style.display = 'block';
     showLoginWrapper();
-  }  
+  }
 };
 
 var updateGoogleUser = function(user){
@@ -34,12 +34,12 @@ var updateGoogleUser = function(user){
     document.getElementById('signin-wrapper').display = "none";
     document.getElementById('user-email').innerText = user.getBasicProfile().getEmail();
     document.getElementById('user-photo').src = user.getBasicProfile().getImageUrl();
-    document.getElementById('user-name').innerText = user.getBasicProfile().getName();   
+    document.getElementById('user-name').innerText = user.getBasicProfile().getName();
   } else {
     document.getElementById('signin-wrapper').display = "block";
     document.getElementById('user-email').innerText = "";
     document.getElementById('user-photo').src = "media/visitante.png";
-    document.getElementById('user-name').innerText = "visitante";  
+    document.getElementById('user-name').innerText = "visitante";
   };
   window.googleUser = user;
 };
@@ -50,7 +50,7 @@ var signinChanged = function(signin){
     window.gapi.client.setToken(window.googleUser.getAuthResponse().id_token)
   } else {
     window.googleUser = {El: null, Zi: null}
-  };  
+  };
   updateGoogleUser(window.googleUser);
 };
 
@@ -73,7 +73,7 @@ var configGoogleAPI = function() {
     document.getElementById('user').style.display = 'block';
     document.getElementById('site-footer').style.display = 'block';
     document.getElementById('signin-button').onclick = function(){window.auth2.signIn()};
-    updateConsent(false);   
+    updateConsent(false);
     console.log('google api initialized')
   }, function(error) {
     console.log(error);
